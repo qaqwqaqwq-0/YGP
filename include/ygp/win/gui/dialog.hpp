@@ -469,7 +469,7 @@ class taskdlg
             c.dwCommonButtons=dwCommonButtons;
             return *this;
         }
-        taskdlg& setwindowtitle(PCWSTR title)noexcept
+        taskdlg& title(PCWSTR title)noexcept
         {
             c.pszWindowTitle=title;
             return *this;
@@ -574,7 +574,7 @@ class taskdlg
             c.cxWidth=nWidth;
             return *this;
         }
-        taskdlg& operator()()
+        taskdlg& operator()()//show the dialog
         {
             HRESULT hr=TaskDialogIndirect(&c,&nbutton,
                 &nradiobutton,&bverificationflagchecked);

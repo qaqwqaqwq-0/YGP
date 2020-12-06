@@ -2,6 +2,7 @@
 #define _YGP_WIN_GUI_GLOBAL_HPP_
 #include"../winerr.hpp"
 #include<functional>
+#pragma comment(lib,"user32")
 #pragma comment(lib,"gdi32")
 #pragma comment(lib,"comctl32")
 BEGIN_NAMESPACE_YGP
