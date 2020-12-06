@@ -11,7 +11,7 @@ YGP is a header-only C++ library for Windows. It provides an object-oriented wra
 
 How to implement a beautiful task dialog as shown below:
 
-![image-20201206222642717](C:\Users\zry\AppData\Roaming\Typora\typora-user-images\image-20201206222642717.png)
+![Result](https://github.com/qaqwqaqwq-0/YGP/blob/main/sample/taskdlgresult.png)
 
 ```cpp
 // Platform: Windows 10
