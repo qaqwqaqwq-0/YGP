@@ -125,6 +125,7 @@ class dialog
 //There is no need to explicitly free any resource.
 
 class taskdlg
+    //You must specify #pragma YGP_MANIFEST when before using this class.
 {
     TASKDIALOGCONFIG c;
     int nbutton,nradiobutton;

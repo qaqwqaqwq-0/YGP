@@ -1,9 +1,15 @@
 # YGP
 A C++ Windows API wrapper library
 
-## Introduction
+## Brief Introduction
 
-YGP is a header-only C++ library for Windows. It provides an object-oriented wrapper on many of the Win32 and COM APIs. It is designed to be user-friendly and have a high performance. Unlike MFC and wxWidgets, this library suggests the use of pure C++ syntax and avoids the use of pointers. The focus of this library is GUI, but many other functions like networking and threading are also included.
+YGP is a header-only C++ library for Windows. It provides an object-oriented wrapper on many of the Win32 and COM APIs, designed to be user-friendly with a high performance. Unlike MFC or wxWidgets, this library suggests the use of pure C++ syntax and avoids the use of pointers. The focus of this library is GUI, but many other functions like networking and threading are also included. The YGP library can be used to develop simple GUI applications, but is mostly useful for complex user interfaces with powerful facilities.
+
+## Purpose
+
+1. To provide a C++ interface for Win32 and COM APIs
+2. To reduce the amount of code and accelerate Windows software development
+3. To support to develop high-performance software
 
 ## Features
 
@@ -44,9 +50,17 @@ YGP_MAIN
 
 The library is designed to be user-friendly, so it is super easy to learn, even without a documentation.
 
-### 2. Using C++17 Syntax
+### 2. Using the C++17 Syntax
 
-### 3. Compatible with MinGW and Microsoft Visual C++
+The library adopts the modern C++ syntax, which can make the code more clear and readable.
+
+### 3. Compatible with Both the MinGW and the Microsoft Visual C++ Compilers
+
+The code of the library follows the common C++ syntax, so the compatibilities are not a problem. However, since g++ doesn't support the #pragma comment expression, MSVC is more recommended.
+
+### 4. Header Only
+
+No annoying linking issues. And, the library can be used in multi-source-file scenarios.
 
 ## Quick Start
 
@@ -72,8 +86,23 @@ This part consists of the header files in include/ygp/win/gui directory.
 
 This part is more than a wrapper; it provides user-friendly access to GUI controls and manipulators. Common controls include static control, button control, edit control, tab control, etc. The Windows GDI objects are also included.
 
+## Learn
+
+1. The [Microsoft Docs](https://docs.microsoft.com/en-us/windows/win32/api/) is a great place to learn some design concepts and API usages.
+2. The documentation is also a tutorial. By reading the docs, you can know not only what the functions and class methods do, but also how to use them.
+
+## Comparisons Between YGP and MFC
+
+| Aspects              | YGP            | MFC                 |
+| :------------------- | :------------- | :------------------ |
+| Compatibility        | MinGW and MSVC | Only MSVC           |
+| Degree of Difficulty | Easy           | Extremely Difficult |
+| Performance          | Efficient      | Slow                |
+| Executable Size      | Tiny           | Giant               |
+| UI Effect            | Beautiful      | Beautiful           |
+
 ## Current Progress
 
 The code part is in progress.
 
-The document part is just started.
+The development of the document part has just started.
