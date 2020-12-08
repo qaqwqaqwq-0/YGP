@@ -4,6 +4,7 @@
 #ifndef _YGP_WIN_HTTP_HPP_
 #define _YGP_WIN_HTTP_HPP_
 #include"winerr.hpp"
+#include<memory>
 #include<winhttp.h>
 #ifndef YGP_DISABLE_COM
 #include<shlwapi.h>

@@ -87,7 +87,7 @@ static std::wstring str2wstr(const std::string&& _str,UINT codepage=CP_ACP)
     multibyte2widechar(_str.c_str(),ret,codepage);
     return ret;
 }
-inline int hexchar2int(wchar_t hexchar)
+static inline int hexchar2int(wchar_t hexchar)
 {
     if(iswdigit(hexchar))return hexchar^L'0';
     hexchar=towlower(hexchar);

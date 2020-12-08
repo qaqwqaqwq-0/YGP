@@ -1,5 +1,5 @@
 //EXTREME ATTENTION: Call ygp::com_uninit() AFTER YGP_CATCH!
-//Because ygp::com_uninit() is a nexcept function
+//Because ygp::com_uninit() is a noexcept function
 //and you cannot call Release method of any COM objects after it!
 #ifndef _YGP_WIN_WEBBROWSER_HPP_
 #define _YGP_WIN_WEBBROWSER_HPP_

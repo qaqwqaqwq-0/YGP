@@ -35,7 +35,7 @@ class dialog
         static INT_PTR fromresparam(int iResId,DLGPROC _DlgProc,
             _Tp _param,HWND hwndParent=nullptr,
             HMODULE hModule=currentmodule())
-            //Create a dialog from a resource
+            //Create a dialog from a resource, with parameters specified
         {
             return DialogBoxParamA(hModule,MAKEINTRESOURCEA(iResId),
                 hwndParent,_DlgProc,(LPARAM)_param);

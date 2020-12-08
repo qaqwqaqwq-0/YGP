@@ -48,7 +48,7 @@ class font:public gdiobj<HFONT>
             {
                 l.lfFaceName[i]=_name[i];
                 if(i==31&&_name[i])
-                    throw std::runtime_error("ygp::font::name: "
+                    throw std::overflow_error("ygp::font::name: "
                         "The length of the face name must not exceed "
                         "32, including the terminating '\\0'.");
                 if(!_name[i])break;

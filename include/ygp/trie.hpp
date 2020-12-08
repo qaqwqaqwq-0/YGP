@@ -41,7 +41,7 @@ class trie//Trie dictionary tree
         {
             ++cur->cnt;
         }
-        node* initial(){return &root;}
+        constexpr node* initial(){return &root;}
         void insert(const ch_t* str)
         {
             reset();
@@ -59,7 +59,11 @@ class trie//Trie dictionary tree
             }
             return cur->cnt;
         }
-        void dfs(triestr& stk,node* nd,void(*__f)(triestr&,std::size_t)=[](triestr& _stk,std::size_t _cnt){std::cout<<_stk,std::cout.put('\t');std::cout<<_cnt;std::cout.put('\n');})
+        void dfs(triestr& stk,node* nd,std::function<void(triestr&,std::size_t)> __f=
+            [](triestr& _stk,std::size_t _cnt)
+            {
+                std::cout<<_stk,std::cout.put('\t');std::cout<<_cnt;std::cout.put('\n');
+            })
         {
             if(nd->cnt)__f(stk,nd->cnt);
             for(std::size_t i=0;i<sz;++i)

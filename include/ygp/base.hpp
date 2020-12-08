@@ -4,9 +4,9 @@
 #include<iostream>
 #include<memory>
 BEGIN_NAMESPACE_YGP
-inline bool io_async(bool __async=true)
+static inline bool io_async(bool __async=true)
 {
-	return std::ios::sync_with_stdio(!__async);
+	return !std::ios::sync_with_stdio(!__async);
 }
 namespace detail
 {

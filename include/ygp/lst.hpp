@@ -4,7 +4,7 @@
 #if __cplusplus>=201103L
 #include<type_traits>
 #endif
-#include<bits/allocator.h>
+#include<memory>
 #include<utility>
 BEGIN_NAMESPACE_YGP
 template<typename value_type>
