@@ -46,7 +46,7 @@ class dialog
             dialog* dlg;
             LPDLGTEMPLATE lpdt;
             LPARAM _lParam;
-            //Using default constructor is not allowed.
+            //Using the default constructor is not allowed.
             initializer()=delete;
             //The user must specify the corresponding
             //ygp::dialog object with the constructor below.
@@ -125,7 +125,8 @@ class dialog
 //There is no need to explicitly free any resource.
 
 class taskdlg
-    //You must specify #pragma YGP_MANIFEST when before using this class.
+    //You must specify #pragma YGP_MANIFEST when before using this class, or 
+    //DLL linking problems will occur.
 {
     TASKDIALOGCONFIG c;
     int nbutton,nradiobutton;
@@ -335,6 +336,9 @@ class taskdlg
             return S_OK;
         }
     public:
+        #ifdef _MSC_VER
+        #pragma region configurations
+        #endif
         std::function<bool(taskdlgwindow&,int/*button id*/,LONG_PTR)> onbuttonclicked;
             //return false to prevent the task dialog from closing
         std::function<void(taskdlgwindow&,LONG_PTR)/*user data*/> oncreated;
@@ -575,6 +579,9 @@ class taskdlg
             c.cxWidth=nWidth;
             return *this;
         }
+        #ifdef _MSC_VER
+        #pragma endregion
+        #endif
         taskdlg& operator()()//show the dialog
         {
             HRESULT hr=TaskDialogIndirect(&c,&nbutton,
@@ -586,14 +593,19 @@ class taskdlg
             return *this;
         }
         int pressedbuttonid()const noexcept
+            //get the clicked button ID
+            //(Call this method after the dialog is shown)
         {
             return nbutton;
         }
         int selectedradiobuttonid()const noexcept
+            //get the selected radio button ID
+            //(Call this method after the dialog is shown)
         {
             return nradiobutton;
         }
         bool verificationflagchecked()const noexcept
+            //(Call this method after the dialog is shown)
         {
             return (bool)bverificationflagchecked;
         }

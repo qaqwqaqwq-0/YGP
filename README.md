@@ -9,7 +9,7 @@ YGP is a header-only C++ library for Windows. It provides an object-oriented wra
 
 1. To provide a C++ interface for Win32 and COM APIs
 2. To reduce the amount of code and accelerate Windows software development
-3. To support to develop high-performance software
+3. To support the development high-performance software
 
 ## Features
 
