@@ -125,6 +125,7 @@ static std::basic_ostream<_Ch>& operator<<(std::basic_ostream<_Ch>& __os,const s
 #define YGP_TRY try{
 #define YGP_CATCH }catch(std::exception& __exp){std::cerr<<"[Error] "<<__exp.what()<<std::endl;}catch(...){std::cerr<<"[Error] Uncaught exception.\n";}
 #define YGP_CATCH_MSGBOX }catch(std::exception& __exp){MessageBoxA(nullptr,(std::string("[Error] ")+__exp.what()).c_str(),"YGP Error",MB_ICONERROR);}catch(...){MessageBoxA(nullptr,"[Error] Uncaught exception.","YGP Error",MB_ICONERROR);}
+#define YGP_CATCH_MSGBOX_(title) }catch(std::exception& __exp){MessageBoxA(nullptr,(std::string("[Error] ")+__exp.what()).c_str(),title,MB_ICONERROR);}catch(...){MessageBoxA(nullptr,"[Error] Uncaught exception.",title,MB_ICONERROR);}
 #define YGP_CATCH_IGNORE }catch(...){}
 #define YGP_CATCH_ALL YGP_CATCH_IGNORE
 #define YGP_PRIT(x) {for(auto& i:x)std::cout<<i<<' ';std::cout<<'\n';}//Print itetarable object

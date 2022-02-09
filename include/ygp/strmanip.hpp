@@ -174,11 +174,11 @@ namespace detail
         {
             for(;*a;++a)
             {
-                if(*a=='%')
+                if(*a==L'%')
                 {
-                    if(*(++a)=='%')
+                    if(*(++a)==L'%')
                     {
-                        ret.push_back('%');
+                        ret.push_back(L'%');
                     }
                     else
                     {
@@ -198,11 +198,11 @@ namespace detail
         {
             for(;*a;++a)
             {
-                if(*a=='%')
+                if(*a==L'%')
                 {
-                    if(*(++a)=='%')
+                    if(*(++a)==L'%')
                     {
-                        ret.push_back('%');
+                        ret.push_back(L'%');
                     }
                     else
                     {

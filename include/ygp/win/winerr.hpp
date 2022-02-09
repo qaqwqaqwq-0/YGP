@@ -98,7 +98,7 @@ static _Tp* cocrtins(REFIID _clsid,REFIID _riid
 	throw_com_error(CoCreateInstance(_clsid,nullptr,dwcls,_riid,(void**)&ret),"cocrtins","CoCreateInstance");
 	return ret;
 }
-static void com_uninit()noexcept
+static inline void com_uninit()noexcept
 {
 	CoUninitialize();
 }

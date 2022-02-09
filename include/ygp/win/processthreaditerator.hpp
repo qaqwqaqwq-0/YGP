@@ -48,6 +48,7 @@ class processiterator
         {
             return iterator(nullptr,nullptr);
         }
+        ~processiterator(){if(h)CloseHandle(h);}
 };
 class threaditerator
 {
@@ -101,6 +102,7 @@ class threaditerator
             for(const auto& i:ti)if(i.th32OwnerProcessID==dwProcId)++dwRet;
             return dwRet;
         }
+        ~threaditerator(){if(h)CloseHandle(h);}
 };
 END_NAMESPACE_YGP
 #endif

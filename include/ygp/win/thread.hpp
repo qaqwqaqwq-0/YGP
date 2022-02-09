@@ -189,18 +189,18 @@ class threadex:public thread
 	void beginex(_Callable&& __f,__Args&&... __args)
 	{
 		//The exceptions thrown in __f must be caught within __f.
-		static_assert(std::is_same<std::tuple<typename std::decay<__Args>::type...>,
-			std::tuple<__Args...>>::value,
-			"ygp::threadex::beginex: Static assertion failed:\n"
-			"[YGP Error] The type of each argument must not be reference type.\n"
-			"[YGP Error] Use std::ref to solve this problem.\n"
-			"[YGP Error] For example,\n"
-			"[YGP Error] \tint param=12345;\n"
-			"[YGP Error] \tygp::threadex th;\n"
-			"[YGP Error] \tth.create([](int& i){param+=10;},param).join();\n"
-			"[YGP Error] The code above is invalid, use:\n"
-			"[YGP Error] \tth.create([](int& i){param+=10;},"
-			"std::ref(param)).join();\n");
+		// static_assert(std::is_same<std::tuple<typename std::decay<__Args>::type...>,
+		// 	std::tuple<__Args...>>::value,
+		// 	"ygp::threadex::beginex: Static assertion failed:\n"
+		// 	"[YGP Error] The type of each argument must not be reference type.\n"
+		// 	"[YGP Error] Use std::ref to solve this problem.\n"
+		// 	"[YGP Error] For example,\n"
+		// 	"[YGP Error] \tint param=12345;\n"
+		// 	"[YGP Error] \tygp::threadex th;\n"
+		// 	"[YGP Error] \tth.create([](int& i){param+=10;},param).join();\n"
+		// 	"[YGP Error] The code above is invalid, use:\n"
+		// 	"[YGP Error] \tth.create([](int& i){param+=10;},"
+		// 	"std::ref(param)).join();\n");
 		using _tuple_t=std::tuple<typename std::decay<_Callable>::type,
 			typename std::decay<__Args>::type...>;
 		auto _tuple=std::make_unique<_tuple_t>(std::forward<_Callable>(__f),
@@ -253,12 +253,13 @@ class threadex:public thread
 	}
 	public:
 		using thread::thread;
-		threadex(DWORD dwThreadId,DWORD dwDesiredAccess=THREAD_ALL_ACCESS)
+		threadex& open(DWORD dwThreadId,DWORD dwDesiredAccess=THREAD_ALL_ACCESS)
 		{
 			_id=dwThreadId;
 			if(!(h=OpenThread(dwDesiredAccess,FALSE,dwThreadId)))
-				throw std::runtime_error("ygp::threadex::threadex "
+				throw std::runtime_error("ygp::threadex::open "
 					"(function OpenThread): "+lasterror<std::string>());
+			return *this;
 		}
 		threadex& stacksize(DWORD dwBytes)noexcept
 		{

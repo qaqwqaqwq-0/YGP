@@ -254,7 +254,7 @@ class wfile//Windows file
         }
         void close()
         {
-            CloseHandle(h);
+            if(h)CloseHandle(h);
             h=nullptr;
         }
 };

@@ -2,6 +2,7 @@
 #define _YGP_WIN_GUI_WINDOW_HPP_
 #include"rect.hpp"
 #include"font.hpp"
+#include<memory>
 BEGIN_NAMESPACE_YGP
 class window
 {
@@ -232,6 +233,7 @@ class window
             if(!GetWindowRect(hwnd,&ret))
                 throw std::runtime_error("ygp::window::windowrect "
                     "(function GetWindowRect): "+lasterror<std::string>());
+            return ret;
         }
         window ancestor(UINT uFlags=GA_ROOTOWNER)noexcept
         {
@@ -400,13 +402,17 @@ class window
         {
             return SendMessageW(hwnd,Msg,wParam,lParam);
         }
-        LRESULT postmsga(UINT Msg,WPARAM wParam=0,LPARAM lParam=0)noexcept
+        window& postmsga(UINT Msg,WPARAM wParam=0,LPARAM lParam=0)
         {
-            return PostMessageA(hwnd,Msg,wParam,lParam);
+            if(!PostMessageA(hwnd,Msg,wParam,lParam))
+                throw std::runtime_error("ygp::window::postmsga "
+                    "(function PostMessageA): "+lasterror<std::string>());
         }
-        LRESULT postmsgw(UINT Msg,WPARAM wParam=0,LPARAM lParam=0)noexcept
+        window& postmsgw(UINT Msg,WPARAM wParam=0,LPARAM lParam=0)
         {
-            return PostMessageW(hwnd,Msg,wParam,lParam);
+            if(!PostMessageW(hwnd,Msg,wParam,lParam))
+                throw std::runtime_error("ygp::window::postmsgw "
+                    "(function PostMessageW): "+lasterror<std::string>());
         }
         template<typename _Tp>
         LONG_PTR setlonga(int nIndex,_Tp lptr)noexcept
@@ -593,6 +599,26 @@ class window
         UINT isdlgbuttonchecked(int nID)
         {
             return IsDlgButtonChecked(hwnd,nID);
+        }
+        window& appendtext(const char* _txt)
+        {
+            DWORD dwStartPos, dwEndPos;
+            sendmsga(EM_GETSEL, (WPARAM)&dwStartPos, (WPARAM)&dwEndPos);
+            int txtlen = GetWindowTextLengthA(hwnd);
+            sendmsga(EM_SETSEL, txtlen, txtlen);
+            sendmsga(EM_REPLACESEL, TRUE, (LPARAM)_txt);
+            sendmsga(EM_SETSEL, dwStartPos, dwEndPos);
+            return *this;
+        }
+        window& appendtext(const wchar_t* _txt)
+        {
+            DWORD dwStartPos, dwEndPos;
+            sendmsgw(EM_GETSEL, (WPARAM)&dwStartPos, (WPARAM)&dwEndPos);
+            int txtlen = GetWindowTextLengthW(hwnd);
+            sendmsgw(EM_SETSEL, txtlen, txtlen);
+            sendmsgw(EM_REPLACESEL, TRUE, (LPARAM)_txt);
+            sendmsgw(EM_SETSEL, dwStartPos, dwEndPos);
+            return *this;
         }
 };
 END_NAMESPACE_YGP

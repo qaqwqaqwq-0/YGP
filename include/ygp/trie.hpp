@@ -4,6 +4,7 @@
 #include<iostream>
 #include<memory>
 #include<string>
+#include<functional>
 BEGIN_NAMESPACE_YGP
 template<typename ch_t=char,std::size_t sz=26>//sz: size of the character set; ch_t: character type
 class trie//Trie dictionary tree

@@ -261,6 +261,9 @@ class httpsession
         void settimeouts(int resolvetimeout=0,int connecttimeout=0,
             int sendtimeout=0,int receivetimeout=0)
             //0,-1=infinite
+            //default values:
+            //resolvetimeout=infinite,connecttimeout=60s,
+            //sendtimeout=30s,receivetimeout=30s
         {
             if(!WinHttpSetTimeouts(h,resolvetimeout,connecttimeout,
                 sendtimeout,receivetimeout))
@@ -296,6 +299,11 @@ class httpconnection
                 throw std::runtime_error("ygp::httpconnection::"
                     "create (function WinHttpConnect): "+
                     detail::winhttplasterror());
+        }
+        void create(HINTERNET hSession,urlcomponents cmp)
+        {
+            create(hSession,cmp.gethostname().c_str(),
+                cmp.getport());
         }
         httpconnection(HINTERNET hSession,LPCWSTR lpszServerName,
             INTERNET_PORT port)
@@ -601,6 +609,16 @@ class httprequest
             WINHTTP_ADDREQ_FLAG_ADD)
         {
             return addheaders(strHeaders.c_str(),dwFlags);
+        }
+        void settimeouts(int resolvetimeout=0,int connecttimeout=0,
+            int sendtimeout=0,int receivetimeout=0)
+            //0,-1=infinite
+        {
+            if(!WinHttpSetTimeouts(h,resolvetimeout,connecttimeout,
+                sendtimeout,receivetimeout))
+                throw std::runtime_error("ygp::httprequest::"
+                    "settimeouts (function WinHttpSetTimeouts): "+
+                    detail::winhttplasterror());
         }
         ~httprequest()
         {

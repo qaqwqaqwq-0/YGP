@@ -363,7 +363,7 @@ struct filedlg
     }
     std::wstring result()
     {
-        IShellItem* itm;
+        IShellItem* itm = nullptr;
         throw_com_error(p->GetResult(&itm),
             "filedlg::result","IFileOpenDialog::GetResult");
         LPWSTR tmp;
@@ -443,6 +443,7 @@ struct drophandle
     {
         char* tmp=new char[1024];
         if(!DragQueryFileA(h,uindex,tmp,1024))
+            delete []tmp,
             throw std::runtime_error("ygp::drophandle::str "
                 "(function DragQueryFileA): "+lasterror<std::string>());
         std::string ret=tmp;
@@ -453,6 +454,7 @@ struct drophandle
     {
         wchar_t* tmp=new wchar_t[1024];
         if(!DragQueryFileW(h,uindex,tmp,1024))
+            delete []tmp,
             throw std::runtime_error("ygp::drophandle::wstr "
                 "(function DragQueryFileW): "+lasterror<std::string>());
         std::wstring ret=tmp;
